@@ -62,7 +62,7 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <serverId>docker-aliyun</serverId>
+                    <serverId>docker-hub</serverId>
                     <registryUrl>${docker.repository}</registryUrl>
                     <pushImage>true</pushImage>
                 </configuration>
