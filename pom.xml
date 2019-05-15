@@ -16,6 +16,10 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <docker.repository>
+            https://cloud.docker.com/repository/registry-1.docker.io/kpmgcoder/practice
+        </docker.repository>
+        <docker.registry.name>practice</docker.registry.name>
     </properties>
 
     <dependencies>
@@ -41,10 +45,16 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.12</version>
+                <version>1.0.0</version>
                 <configuration>
-                    <imageName>pipeline-practice</imageName>
+                    <imageName>${project.artifactId}</imageName>
                     <dockerDirectory>${project.basedir}/</dockerDirectory>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                        <imageTag>latest</imageTag>
+                        <!-- 强制覆盖 -->
+                        <forceTags>true</forceTags>
+                    </imageTags>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
@@ -52,7 +62,11 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <serverId>docker-aliyun</serverId>
+                    <registryUrl>${docker.repository}</registryUrl>
+                    <pushImage>true</pushImage>
                 </configuration>
+
             </plugin>
         </plugins>
     </build>
